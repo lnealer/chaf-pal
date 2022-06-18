@@ -1,3 +1,6 @@
+ham protein
+bagel carb
+tomato veggie
 spaghetti carb
 ground meat protein
 sauce veggie

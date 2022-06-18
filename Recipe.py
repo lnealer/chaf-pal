@@ -8,12 +8,19 @@ class IngredientType(Enum):
 
 class Recipe:
 
-  def __init__(self, proteins=[], veggies=[], carbs=[], name=""):
-    self.name = name
-    self.proteins = proteins
-    self.veggies = veggies
-    self.carbs = carbs
-    self.type  = IngredientType.MEAL
+  def __init__(self, proteins=None, veggies=None, carbs=None, name=""):
+    if proteins is None or carbs is None or veggies is None:
+      self.proteins = []
+      self.veggies = []
+      self.carbs = []
+      self.name = ""
+      self.type  = IngredientType.MEAL
+    else:
+      self.name = name
+      self.proteins = proteins
+      self.veggies = veggies
+      self.carbs = carbs
+      self.type  = IngredientType.MEAL
 
   def add_ingredient(self, ingredient):
     if ingredient.type.value == IngredientType.PROTEIN.value:

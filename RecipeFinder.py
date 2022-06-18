@@ -24,12 +24,12 @@ class RecipeFinder:
     # check if the current meal is valid
     # a valid meal has all of the ingredients for the chosen recipe
     recipe = self.currentMeal["Meal"]
-    #self.meals[self.currentMeal["Name"]]
     return self.currentMeal["Protein"].name in recipe.proteins \
       and self.currentMeal["Veggie"].name in recipe.veggies \
       and self.currentMeal["Carb"].name in recipe.carbs
 
   def IngredientInRecipe(self, ingredient, recipe):
+    # check if an ingredient is usable in the given recipe
     if ingredient.type.value == IngredientType.PROTEIN.value:
       return ingredient.name in recipe.proteins
     elif ingredient.type.value == IngredientType.CARB.value:
@@ -40,7 +40,7 @@ class RecipeFinder:
       return False
 
   def MealIncomplete(self): 
-    # check if the meal is complete 
+    # check if the meal is incomplete 
     # i.e. does it contain a protein, veggie, and carb
     return not self.currentMeal["Protein"].name != "" \
       or not self.currentMeal["Veggie"].name != "" \
@@ -52,23 +52,26 @@ class RecipeFinder:
       # if the stack is empty, the algorithm has failed to find a valid recipe
       print("Go to the grocery store!")
       return -1
-
     current_ingredient = self.stack.pop()
-    self.currentMeal[current_ingredient.type.name.title()] = current_ingredient
-    if (not self.MealIncomplete()) and self.IsMealValid():
-      # you have a well balanced and valid recipe
-      return 1
-    if self.IngredientInRecipe(current_ingredient, self.currentMeal["Meal"]) or current_ingredient.type.value == IngredientType.MEAL.value:
-      # push the next ingredient type onto the list
-      next_ingredient_type = IngredientType(current_ingredient.type.value + 1)
-      self.stack = self.stack + self.ingredients[next_ingredient_type.name.title()] 
-    #print(self.stack)
+
+    if self.IngredientInRecipe(current_ingredient, self.currentMeal["Meal"]) \
+      or current_ingredient.type.value == IngredientType.MEAL.value:
+      # add ingredient to meal 
+      self.currentMeal[current_ingredient.type.name.title()] = current_ingredient
+
+      if self.MealIncomplete():
+        # push the next ingredient type onto the list
+        next_ingredient_type = IngredientType(current_ingredient.type.value + 1)
+        self.stack = self.stack + self.ingredients[next_ingredient_type.name.title()]
+      else: return 1
     return 0
 
   def FindRecipe(self):
-    while self.MoveForward() == 0:
-      out = self.currentMeal
-    if self.MoveForward == -1:
+    # run the algorithm
+    state = self.MoveForward()
+    while state == 0:
+      state = self.MoveForward()
+    if state == -1:
       return None
     return self.currentMeal
   

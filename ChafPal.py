@@ -4,6 +4,7 @@ from RecipeFinder import *
 from glob import glob
 from enum import Enum
 from Recipe import *
+import random
 
 class IngredientType(Enum):
   MEAL = 1
@@ -19,7 +20,7 @@ def ReadIngredientFile(ingredient_file):
   with open(ingredient_file) as file:
     data = file.read()
     ingredient_list = data.split('\n')
-
+  random.shuffle(ingredient_list) #shuffle order to keep things interesting
   for ingredient in ingredient_list:
     line = ingredient.split(' ')
     ingredient_name = ' '.join(line[0:-1])
@@ -48,6 +49,7 @@ def ReadRecipeFile(meal_filename):
 def ReadMealsFolder(meal_folder_name):
   out = []
   meal_filenames = glob(f"{meal_folder_name}/*.txt")
+  random.shuffle(meal_filenames) #shuffle order to keep things interesting
   for meal_filename in meal_filenames:
     recipe = ReadRecipeFile(meal_filename)
     out.append(recipe)
@@ -63,14 +65,14 @@ if __name__ == "__main__":
   parser.add_argument(
     "--ingredients_file",
     type=str,
-    default = "ingredients.txt",
+    default = "food/ingredients.txt",
     help = "The name of the txt file containing your list of available ingredients"
   )
 
   parser.add_argument(
     "--recipe_folder",
     type=str,
-    default = "recipes",
+    default = "food/recipes",
     help = "The name of the folder containing your recipes in .txt form"
   )
 
