@@ -1,34 +1,11 @@
 # chaf-pal
-______░░░░░░░░░░░░░░______
-__░░░░░░__________░░░░░░__
-░░░░__________________░░░░
-░░______________________░░
-░░______________________░░
-░░░░__░░__░░__░░__░░__░░░░
-__░░__░░__░░__░░__░░__░░__
-__░░__░░__░░__░░__░░__░░__
-__▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒__
-__░░░░░░░░░░░░░░░░░░░░▓▓__
-__░░██░░░░░░░░░░██░░░░▓▓__
-__░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░__
-__░░▓▓▓▓▓▓░░▓▓▓▓▓▓░░░░░░__
-__░░▓▓░░░░░░░░░░▓▓░░░░░░__
-____▓▓▓▓▓▓▓▓▓▓▓▓▓▓________
-______▓▓▓▓▓▓▓▓▓▓__________
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 An algorithm to generate meal ideas based on ingredients in your kitchen!
+
+Give chaf-pal the recipes you know how to cook and the ingredients in your kitchen, and it'll figure out what meal you can make.
+
+## How to use
+### Ingredients
+### Recipes
+### Running chaf-pal
+
+## Future Work
