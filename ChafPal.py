@@ -39,9 +39,7 @@ def ReadRecipeFile(meal_filename):
   with open(meal_filename) as file:
     data = file.read()
     ingredients = data.split('\n')
-  print(meal_filename)
   recipe.name =  re.findall(r'(\S+/)+(.+){1}.txt', meal_filename)[-1][-1] # get recipe name from file path
-  print(recipe.name)
     #r'(^.+/)*/?(.*).txt$', meal_filename))
     
 
