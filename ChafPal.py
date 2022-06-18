@@ -5,6 +5,7 @@ from glob import glob
 from enum import Enum
 from Recipe import *
 import random
+import re
 
 class IngredientType(Enum):
   MEAL = 1
@@ -38,8 +39,13 @@ def ReadRecipeFile(meal_filename):
   with open(meal_filename) as file:
     data = file.read()
     ingredients = data.split('\n')
-  recipe.name = ingredients.pop(0)
+  print(meal_filename)
+  recipe.name =  re.findall(r'(\S+/)+(.+){1}.txt', meal_filename)[-1][-1] # get recipe name from file path
+  print(recipe.name)
+    #r'(^.+/)*/?(.*).txt$', meal_filename))
+    
 
+#^\\(.+\\)*(.+)\.(.+)$
   for ingredient_info in ingredients:
     line = ingredient_info.split(' ')
     ingredient_name = ' '.join(line[0:-1])
