@@ -25,9 +25,12 @@ def ReadIngredientFile(ingredient_file):
     line = ingredient.split(' ')
     ingredient_name = ' '.join(line[0:-1])
     ingredient_typename = line[-1]
-    out[ingredient_typename.title()] \
-    .append(Ingredient(ingredient_name.lower(),  \
-                        IngredientType[ingredient_typename.upper()]))
+    try:
+      out[ingredient_typename.title()] \
+      .append(Ingredient(ingredient_name.lower(),  \
+                          IngredientType[ingredient_typename.upper()]))
+    except: print(ingredient_typename.upper(), 'in', ingredient_file, \
+      'is not a valid ingredient type. Chaf-pal has ignored this ingredient.')
   return out
                 
 def ReadRecipeFile(meal_filename):
@@ -40,7 +43,9 @@ def ReadRecipeFile(meal_filename):
   for ingredient_info in ingredients:
     line = ingredient_info.split(' ')
     ingredient_name = ' '.join(line[0:-1])
-    ingredient_type = IngredientType[line[-1].upper()]
+    try: ingredient_type = IngredientType[line[-1].upper()]
+    except: print(line[-1].upper(), 'in', meal_filename, \
+      'is not a valid ingredient type. Chaf-pal has ignored this ingredient.')
     ingredient = Ingredient(ingredient_name, ingredient_type)
     recipe.add_ingredient(ingredient)
   return recipe
